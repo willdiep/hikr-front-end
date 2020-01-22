@@ -35,14 +35,19 @@ class Homepage extends React.Component {
             this.props.findLocation(result[0].lat, result[0].lon)
           }
         )
-        this.props.history.push('/hikingtrails')
+        if(this.props.username){
+            this.props.history.push('/hikingtrails')
+        }
+        else {
+            this.props.history.push('/signup')
+        }
     }
         
 
     render() {
         return (
             <div>
-                <h1>Welcome!</h1>
+                <h1>Welcome {this.props.username}!</h1>
                 <Form onSubmit={this.handleSubmit}>
                 <h2>Find a hiking trail:</h2>
                 <br></br>
