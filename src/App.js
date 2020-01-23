@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Homepage from './components/Homepage'
+import HikingTrail from './components/HikingTrail'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -52,6 +53,7 @@ class App extends Component {
         <Switch>
         <Route exact path="/" component={() => <Homepage findLocation={this.handleUserLocation} username={this.state.currentUser} />} />
         <Route exact path="/hikingtrails" component={() => <Map lat={this.state.latitude} lon={this.state.longitude}/>} />
+        <Route exact path="/hikingtrails/id" component={() => <HikingTrail />} />
         <Route exact path="/signup" component={() => <Signup signup={this.handleSignupAndLogin}/>} />
         <Route exact path="/login" component={() => <Login login={this.handleSignupAndLogin}/>} />
         {/* <Route exact path="/logout" render={() => this.logoutUser} /> */}

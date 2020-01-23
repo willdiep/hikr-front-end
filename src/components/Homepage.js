@@ -26,12 +26,10 @@ class Homepage extends React.Component {
         } else {
              var url = 'https://us1.locationiq.com/v1/search.php?key=' + `${locationKey}` + '&q=' + `${this.state.location}` + '&format=json'
         }
-        console.log(url)
         fetch(url)
         .then(res => res.json())
         .then(
           (result) => {
-            console.log(result)
             this.props.findLocation(result[0].lat, result[0].lon)
           }
         )

@@ -48,7 +48,7 @@ class Signup extends React.Component {
         .then(res => res.json())
         .then(
             (result) => {
-                console.log(result)
+                // console.log(result)
                 this.props.signup(result.username, result.id)
 
             }

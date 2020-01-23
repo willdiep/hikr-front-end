@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { Button } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import '../map.css'
 
 mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_API_KEY}`
@@ -42,6 +42,19 @@ class Map extends Component {
     )
   }
 
+  makeTrailJSON = (trail) => {
+
+    return (
+        {
+          name: trail.name,
+          location: trail.location,
+          distance: trail.length,
+          longitude: trail.longitude,
+          latitude: trail.latitude
+        }
+      )
+  }
+
   componentDidMount() {
     let trailsUrl = 'https://www.hikingproject.com/data/get-trails?lat=' + `${this.state.lat}` + '&lon=' + `${this.state.lng}` + '&maxDistance=10&key=' + `${hikingKey}`
     console.log(trailsUrl)
@@ -50,7 +63,8 @@ class Map extends Component {
     .then(
       (result) => {
         result.trails.forEach(trail => stores.features.push(this.makeGeoJSON(trail)))
-        
+        result.trails.forEach(trail => trailInfo.trails.push(this.makeTrailJSON(trail)))
+        postTrails();
       } 
     )
 
@@ -58,6 +72,45 @@ class Map extends Component {
       type: 'FeatureCollection',
       features: []
     }
+
+    //FETCH TO BACKEND TO POST NEW HIKINGTRAILS----------------------------
+    
+    let trailInfo = {
+      trails: []
+    }
+
+
+  function postTrails() {
+  console.log(trailInfo.trails)
+    trailInfo.trails.forEach(function(info){
+      fetch('http://localhost:3000/hikingtrails', {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: info.name,
+          location: info.location,
+          distance: info.length,
+          longitude: info.longitude,
+          latitude: info.latitude
+        })
+      })
+      .then(res => res.json())
+      .then(
+          (result) => {
+              console.log(result)
+    
+          }
+        
+      )
+      
+    })
+  }
+  
+ 
+  //-------------------------------------------------------------------------
 
     /**
      * Assign a unique id to each store. You'll use this `id`
@@ -274,11 +327,9 @@ class Map extends Component {
         )
         .addTo(map)
     
-
-      // popup.addEventListener('click', function(e){
-      //   console.log(e)
+        // this.props.history.push('/hikingtrails/id')
       // })
-
+      
     }
   }
 
@@ -310,4 +361,4 @@ class Map extends Component {
   }
 }
 
-export default Map
+export default withRouter(Map)
