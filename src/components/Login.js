@@ -7,9 +7,7 @@ class Signup extends React.Component {
     constructor() {
         super();
         this.state = {
-            name: "",
             username:"",
-            email: "",
             password: ""
         }
     }
@@ -23,29 +21,19 @@ class Signup extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // fetch to localhost to post user info
-        let submitObj = {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(userInfo)
-        }
-
-        let userInfo = {
-            name: this.state.name,
-            username: this.state.username,
-            email: this.state.email,
-            password: this.state.password
-        }
-
-        fetch('http://localhost:3000/users', submitObj)
+        // fetch to localhost to check for user info
+        fetch('http://localhost:3000/users')
         .then(res => res.json())
         .then(
             (result) => {
-                console.log(result)
-                // this.props.signup(result.id, result.username)
+                result.forEach(user => {
+                    if(user.username == this.state.username && user.password == this.state.password) {
+                        this.props.login(user.username, user.id)
+                        this.props.history.push('/')
+                    } else {
+                        this.props.history.push('/signup')
+                    }
+                })
 
             }
         )

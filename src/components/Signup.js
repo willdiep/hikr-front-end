@@ -24,33 +24,37 @@ class Signup extends React.Component {
     handleSubmit = (event) => {
         event.preventDefault();
         // fetch to localhost to post user info
-        // let submitObj = {
-        //     method: "POST",
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(userInfo)
-        // }
 
-        // let userInfo = {
-        //     name: this.state.name,
-        //     username: this.state.username,
-        //     email: this.state.email,
-        //     password: this.state.password
-        // }
+        let userInfo = {
+            name: this.state.name,
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
+        }
 
-        // fetch('http://localhost:3000/users', submitObj)
-        // .then(res => res.json())
-        // .then(
-        //     (result) => {
-        //         console.log(result)
-        //         // this.props.signup(result.id, result.username)
 
-        //     }
-        // )
+        let submitObj = {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userInfo)
+        }
+
+     
+
+        fetch('http://localhost:3000/users', submitObj)
+        .then(res => res.json())
+        .then(
+            (result) => {
+                console.log(result)
+                this.props.signup(result.username, result.id)
+
+            }
+        )
+        .catch((err)=>console.log(err))
         this.props.history.push('/')
-        this.props.signup(this.state.username, this.state.id)
         
     }
 

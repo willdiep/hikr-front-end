@@ -28,19 +28,13 @@ class App extends Component {
     })
   }
 
-  handleSignup = (username, id) => {
+  handleSignupAndLogin = (username, id) => {
     this.setState({
       currentId: id,
       currentUser: username
     })
   }
   
-  handleLogin = (username, id) => {
-    this.setState({
-      currentId: id,
-      currentUser: username
-    })
-  }
   
   componentDidMount() {
     // fetch(Stores)
@@ -58,8 +52,8 @@ class App extends Component {
         <Switch>
         <Route exact path="/" component={() => <Homepage findLocation={this.handleUserLocation} username={this.state.currentUser} />} />
         <Route exact path="/hikingtrails" component={() => <Map lat={this.state.latitude} lon={this.state.longitude}/>} />
-        <Route exact path="/signup" component={() => <Signup signup={this.handleSignup}/>} />
-        <Route exact path="/login" component={() => <Login login={this.handleLogin}/>} />
+        <Route exact path="/signup" component={() => <Signup signup={this.handleSignupAndLogin}/>} />
+        <Route exact path="/login" component={() => <Login login={this.handleSignupAndLogin}/>} />
         {/* <Route exact path="/logout" render={() => this.logoutUser} /> */}
         </Switch>
         </Router>
