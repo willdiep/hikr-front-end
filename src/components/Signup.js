@@ -60,7 +60,13 @@ class Signup extends React.Component {
 
     render () {
         return (
-            <div>
+            <div class="signup">
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
                 <Form onSubmit={this.handleSubmit}>
                 <h1>Sign Up</h1>
                 <div>
@@ -80,7 +86,7 @@ class Signup extends React.Component {
                     <input type="password" name="password" placeholder="Password" onChange={this.handleChange} />
                 </div>
                     <br></br>
-                    <input type="submit" value="Signup" />
+                    <input className="buttons" type="submit" value="Signup" />
                 </Form>
                 <br></br>
                 <h4>Already have an account? <NavLink to="/login" >Login</NavLink></h4>

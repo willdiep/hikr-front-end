@@ -72,14 +72,14 @@
   /* height: auto; */
 }
 
-.homepage {
+.homepage, .signup, .login {
   /* background-color: orange; */
   background-image: url("./images/home-page-wallpaper1.jpg");
   background-repeat: no-repeat;
   /* background-attachment: fixed; */
   background-position: center; 
   background-size: 100%;
-  height: 50vh;
+  height: 80vh;
   
 }
 

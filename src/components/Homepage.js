@@ -50,6 +50,7 @@ class Homepage extends React.Component {
         return (
             <div class="homepage">
                 <br></br><br></br><br></br><br></br>
+                <br></br><br></br><br></br><br></br>
                 <div class="form">
                 <h1>Welcome {this.props.username}!</h1>
                 <Form onSubmit={this.handleSubmit}>
