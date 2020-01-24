@@ -1,19 +1,37 @@
 import React, { Component } from 'react'
 import mapboxgl from 'mapbox-gl'
 import { Button } from 'react-bootstrap'
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink, withRouter, Link } from 'react-router-dom'
 import '../map.css'
+import HikingTrail from './HikingTrail'
 
 mapboxgl.accessToken = `${process.env.REACT_APP_MAPBOX_API_KEY}`
 let hikingKey = `${process.env.REACT_APP_HIKING_PROJECT_API_KEY}`
+
+var trailStuff = [
+  {
+  name: null,
+  city: null,
+  summary: null,
+  length: null,
+  longitude: null,
+  latitude: null,
+  stars: null
+}
+];
 
 class Map extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      lng: props.lon,
-      lat: props.lat,
-      zoom: 9
+      zoom: 9,
+      currentTrailName: null,
+      currentTrailCity: null,
+      currentTrailSummary: null,
+      currentTrailLength: null,
+      currentTrailLng: null,
+      currentTrailLat: null,
+      currentTrailStars: null
     }
   }
 
@@ -56,7 +74,7 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    let trailsUrl = 'https://www.hikingproject.com/data/get-trails?lat=' + `${this.state.lat}` + '&lon=' + `${this.state.lng}` + '&maxDistance=10&key=' + `${hikingKey}`
+    let trailsUrl = 'https://www.hikingproject.com/data/get-trails?lat=' + `${this.props.lat}` + '&lon=' + `${this.props.lng}` + '&maxDistance=10&key=' + `${hikingKey}`
     console.log(trailsUrl)
     fetch(trailsUrl)
     .then(res => res.json())
@@ -81,8 +99,8 @@ class Map extends Component {
 
 
   function postTrails() {
-  console.log(trailInfo.trails)
     trailInfo.trails.forEach(function(info){
+      console.log(info)
       fetch('http://localhost:3000/hikingtrails', {
         method: "POST",
         headers: {
@@ -125,17 +143,25 @@ class Map extends Component {
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [this.state.lng, this.state.lat],
+      center: [this.props.lng, this.props.lat],
       zoom: this.state.zoom
       // scrollZoom: true
     })
 
     map.on('move', () => {
       this.setState({
-        lng: map.getCenter().lng.toFixed(4),
-        lat: map.getCenter().lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
+        // lng: map.getCenter().lng.toFixed(4),
+        // lat: map.getCenter().lat.toFixed(4),
+        zoom: map.getZoom().toFixed(2),
+        currentTrailName: trailStuff[0].name,
+        currentTrailCity: trailStuff[0].city,
+        currentTrailSummary: trailStuff[0].summary,
+        currentTrailLength: trailStuff[0].length,
+        currentTrailLng: trailStuff[0].longitude,
+        currentTrailLat: trailStuff[0].latitude,
+        currentTrailStars: trailStuff[0].stars,
       })
+      this.handleMapClick();
     })
 
     /**
@@ -214,8 +240,8 @@ class Map extends Component {
 
         /* Add the link to the individual listing created above. */
         const link = listing.appendChild(document.createElement('a'))
-        link.href = '#'
-        link.className = 'name'
+        link.href = '/hikingtrails/' + prop.name
+        link.className = prop.name
         link.id = 'link-' + prop.id
         link.innerHTML = prop.name
 
@@ -241,7 +267,10 @@ class Map extends Component {
               var clickedListing = data.features[i]
               flyToStore(clickedListing)
               createPopUp(clickedListing)
-            }
+              trailStuff = []
+              trailStuff.push(clickedListing.properties)
+                }
+            
           }
           const activeItem = document.getElementsByClassName('active')
           if (activeItem[0]) {
@@ -319,22 +348,26 @@ class Map extends Component {
       var popup = new mapboxgl.Popup({ closeOnClick: false, anchor: 'bottom' })
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML(
-          '<h3>' + currentFeature.properties.name + '</h3>' +
+            '<h3><a href="http://localhost:3001/hikingtrails/' + currentFeature.properties.name + '">' + currentFeature.properties.name + '</a></h3>' +
             '<h5>Distance: ' + currentFeature.properties.length + ' miles</h5>' +
             '<h5>' + currentFeature.properties.summary + '</h5>' +
             '<img src=' + currentFeature.properties.img_url + '>' +
             '<h5>Conditions: ' + currentFeature.properties.condition + '</h5>'
         )
         .addTo(map)
-    
         // this.props.history.push('/hikingtrails/id')
       // })
       
     }
+
+  }
+  
+
+  // map onlick function to send state to parent
+  handleMapClick = (event) => {
+    this.props.mapClick(trailStuff[0])
   }
 
-
-  
 
   render() {
     return (
