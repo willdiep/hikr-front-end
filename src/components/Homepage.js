@@ -44,7 +44,7 @@ class Homepage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div class="homepage">
                 <h1>Welcome {this.props.username}!</h1>
                 <Form onSubmit={this.handleSubmit}>
                 <h2>Find a hiking trail:</h2>
