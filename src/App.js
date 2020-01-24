@@ -8,6 +8,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Homepage from './components/Homepage'
 import HikingTrail from './components/HikingTrail'
+import HikingTrailList from './components/HikingTrailList'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -23,8 +24,6 @@ class App extends Component {
       currentTrailCity: null,
       currentTrailSummary: null,
       currentTrailLength: null,
-      currentTrailLng: null,
-      currentTrailLat: null,
       currentTrailStars: null
     }
   }
@@ -49,8 +48,6 @@ class App extends Component {
       currentTrailCity: info.city,
       currentTrailSummary: info.summary,
       currentTrailLength: info.length,
-      currentTrailLng: info.longitude,
-      currentTrailLat: info.latitude,
       currentTrailStars: info.stars
     })
   }
@@ -78,7 +75,15 @@ class App extends Component {
         <Switch>
         <Route exact path="/" component={() => <Homepage findLocation={this.handleUserLocation} username={this.state.currentUser} />} />
         <Route exact path="/hikingtrails" component={() => <Map lat={this.state.latitude} lng={this.state.longitude} mapClick={this.handleMapClick}/>} />
-        <Route path='/hikingtrail`${this.state.currentTrailName}`' component={() => <HikingTrail id={this.state.currentId} trailInfo={this.state}/>} />
+        <Route exact path="/alltrails" component={() => <HikingTrailList />} />
+        <Route exact path="hikingtrails/%60$%7Btrail.id%7D%60" 
+        component={() => <HikingTrail />}
+        // render={browserInfo => {
+        //   const slug = browserInfo.match.params.slug;
+        //   const trail = this.state.currentTrailName.find(trail => trail.slug === slug);
+        //   return trail ? (<HikingTrail trail={trail} /> ) : ( <h1>Loading...</h1>);
+        // }}
+         />
         <Route exact path="/signup" component={() => <Signup signup={this.handleSignupAndLogin}/>} />
         <Route exact path="/login" component={() => <Login login={this.handleSignupAndLogin}/>} />
         {/* <Route exact path="/logout" render={() => this.logoutUser} /> */}

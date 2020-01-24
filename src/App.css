@@ -6,6 +6,9 @@
   padding: 10px;
 }
 
+.trailList {
+  list-style: none;
+}
 
 /*
 .App-logo {

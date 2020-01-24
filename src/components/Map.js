@@ -14,8 +14,8 @@ var trailStuff = [
   city: null,
   summary: null,
   length: null,
-  longitude: null,
-  latitude: null,
+  // longitude: null,
+  // latitude: null,
   stars: null
 }
 ];
@@ -29,8 +29,8 @@ class Map extends Component {
       currentTrailCity: null,
       currentTrailSummary: null,
       currentTrailLength: null,
-      currentTrailLng: null,
-      currentTrailLat: null,
+      // currentTrailLng: null,
+      // currentTrailLat: null,
       currentTrailStars: null
     }
   }
@@ -148,7 +148,7 @@ class Map extends Component {
       // scrollZoom: true
     })
 
-    map.on('move', () => {
+    map.on('move', (e) => {
       this.setState({
         // lng: map.getCenter().lng.toFixed(4),
         // lat: map.getCenter().lat.toFixed(4),
@@ -157,11 +157,11 @@ class Map extends Component {
         currentTrailCity: trailStuff[0].city,
         currentTrailSummary: trailStuff[0].summary,
         currentTrailLength: trailStuff[0].length,
-        currentTrailLng: trailStuff[0].longitude,
-        currentTrailLat: trailStuff[0].latitude,
+        // currentTrailLng: trailStuff[0].longitude,
+        // currentTrailLat: trailStuff[0].latitude,
         currentTrailStars: trailStuff[0].stars,
       })
-      this.handleMapClick();
+      // this.handleMapClick()
     })
 
     /**
@@ -240,7 +240,7 @@ class Map extends Component {
 
         /* Add the link to the individual listing created above. */
         const link = listing.appendChild(document.createElement('a'))
-        link.href = '/hikingtrails/' + prop.name
+        link.href = '/hikingtrails/' + prop.name + ':slug'
         link.className = prop.name
         link.id = 'link-' + prop.id
         link.innerHTML = prop.name
@@ -364,8 +364,10 @@ class Map extends Component {
   
 
   // map onlick function to send state to parent
-  handleMapClick = (event) => {
+  handleMapClick = (event, e) => {
+    // event.preventDefault();
     this.props.mapClick(trailStuff[0])
+    console.log(trailStuff[0])
   }
 
 
@@ -389,6 +391,7 @@ class Map extends Component {
         </div>
         <div ref={el => (this.mapContainer = el)} className="map" />
         {/* <div id='map' class='map'></div> */}
+        
       </div>
     )
   }

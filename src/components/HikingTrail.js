@@ -4,9 +4,9 @@ import { Form } from 'react-bootstrap'
 let tagArray = [];
 
 class HikingTrail extends React.Component {
-    constructor() {
-        super();
-        this.props = {
+    constructor(props) {
+        super(props);
+        this.state = {
             id: null,
             name: null,
             distance: null,
@@ -25,20 +25,6 @@ class HikingTrail extends React.Component {
     }
 
     
-    // componentDidMount() {
-    // fetch('http://localhost:3000/hikingtrails/{:id}')
-    // .then(res => res.json())
-    // .then((result) => {
-    //     this.setprops({
-    //         id: result.id,
-    //         name: result.name,
-    //         distance: result.length,
-    //         location: result.location,
-    //         longitude: result.longitude,
-    //         latitude: result.latitude,
-    //         views: result.views
-    //     })
-    // })
 
     // fetch('http://localhost:3000/tags')
     // .then(res => res.json())
