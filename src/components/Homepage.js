@@ -56,10 +56,10 @@ class Homepage extends React.Component {
                 <h2>Find a hiking trail:</h2>
                 <br></br>
                 <div>
-                <input type="text" name="location" placeholder="Location" value={this.state.location} onChange={this.handleChange}/>
+                <input type="text" name="location" placeholder="Enter location here..." className="location" value={this.state.location} onChange={this.handleChange}/>
                 </div>
                 <br></br>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" className="buttons"/>
                 </Form>
                 </div>
             </div>
