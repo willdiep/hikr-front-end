@@ -1,8 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
 import { Form } from 'react-bootstrap';
+// import wallpaper from './images/home-page-wallpaper1.jpg'
 
 let locationKey = `${process.env.REACT_APP_LOCATIONIQ_API_KEY}`
+
+
+// console.log(wallpaper)
 
 class Homepage extends React.Component {
     constructor() {
@@ -45,6 +49,8 @@ class Homepage extends React.Component {
     render() {
         return (
             <div class="homepage">
+                <br></br><br></br><br></br><br></br>
+                <div class="form">
                 <h1>Welcome {this.props.username}!</h1>
                 <Form onSubmit={this.handleSubmit}>
                 <h2>Find a hiking trail:</h2>
@@ -55,6 +61,7 @@ class Homepage extends React.Component {
                 <br></br>
                 <input type="submit" value="Submit" />
                 </Form>
+                </div>
             </div>
         )
     }

@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom'
 import { Navbar, Nav, Button } from 'react-bootstrap';
 
-
 class Navigation extends React.Component {
 
     logoutUser = (event) => {
