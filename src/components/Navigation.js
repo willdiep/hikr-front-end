@@ -16,7 +16,7 @@ class Navigation extends React.Component {
         return(
             <div>
             <Navbar bg="#eeddcc" variant="light">
-                <Navbar.Brand><img src={logo} width="425px" height="125px" /></Navbar.Brand>
+                <Navbar.Brand><img class="logo" src={logo} width="425px" height="125px" /></Navbar.Brand>
                 <Nav className="mr-auto">
                 <NavLink exact to='/' style={{ padding: '9px', color: 'black', textDecoration: 'none' }} activeStyle={{ border: "1px solid #ddbb98" }}>Home</NavLink>
                 

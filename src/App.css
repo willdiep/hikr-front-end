@@ -49,9 +49,12 @@
 
  */
 
+.logo {
+  /* width: 100%; */
+  /* height: auto; */
+}
+
 .homepage {
-
-
   /* background-color: orange; */
   background-image: url("./images/home-page-wallpaper1.jpg");
   background-repeat: no-repeat;
