@@ -20,8 +20,10 @@ class Navigation extends React.Component {
                 <Nav className="mr-auto">
                 <NavLink exact to='/' style={{ padding: '9px', color: "#eeddcc" }} activeStyle={{ border: "1px solid white" }}>Home</NavLink>
                 
-                {this.props.username ? <NavLink to='/hikingtrails' style={{ padding: '9px', color: "#eeddcc" }} activeStyle={{ border: "1px solid white" }}>Hiking Trails</NavLink> : null}
+                {this.props.username ? <NavLink to='/hikingtrails' style={{ padding: '9px', color: "#eeddcc" }} activeStyle={{ border: "1px solid white" }}>Map</NavLink> : null}
                 
+                <NavLink to='/alltrails' style={{ padding: '9px', color: "#eeddcc" }} activeStyle={{ border: "1px solid white" }}>Hiking Trails</NavLink>
+
                 {this.props.username ? <NavLink to='/profile' style={{ padding: '9px', color: "#eeddcc" }} activeStyle={{ border: "1px solid white" }}>Profile</NavLink> : null}
                 </Nav>
                 
