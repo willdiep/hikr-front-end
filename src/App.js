@@ -8,6 +8,7 @@ import Signup from './components/Signup'
 import Homepage from './components/Homepage'
 import TrailProfile from './components/TrailProfile'
 import HikingTrailList from './components/HikingTrailList'
+import NotFound from './components/NotFound'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
@@ -60,12 +61,13 @@ class App extends Component {
   //   })
   // }
 
-  componentDidMount() {
-    // fetch(Stores)
-    // .then(res => res.json())
-    // .then(res => console.log(res.features))
-    // // .then(store => this.setState({ pokemonCollection: pokemonCollection }))
-    // .catch(e => console.error(e))
+  renderTrail = (routerProps) => {
+    // debugger
+    let TrailId = parseInt(routerProps.match.params.id)
+    let foundTrail = this.state.trails.find(
+      (TrailObj) => TrailObj.id === TrailId
+    )
+    return foundTrail ? <TrailProfile Trail={foundTrail} /> : <NotFound />
   }
 
   render() {
@@ -103,8 +105,6 @@ class App extends Component {
               component={() => <HikingTrailList />}
             />
 
-            <Route path='/mappage/:slug' component={<TrailProfile />} />
-
             <Route
               exact
               path='/signup'
@@ -116,7 +116,11 @@ class App extends Component {
               path='/login'
               component={() => <Login login={this.handleSignupAndLogin} />}
             />
-            {/* <Route exact path="/logout" render={() => this.logoutUser} /> */}
+
+            <Route
+              path='/mappage/:id'
+              render={(routerProps) => this.renderTrail(routerProps)}
+            />
           </Switch>
         </Router>
       </div>

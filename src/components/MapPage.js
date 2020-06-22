@@ -33,13 +33,13 @@ class MapPage extends Component {
 
     this.state = {
       zoom: 10,
-      currentTrailName: null,
-      currentTrailCity: null,
-      currentTrailSummary: null,
-      currentTrailLength: null,
+      // currentTrailName: null,
+      // currentTrailCity: null,
+      // currentTrailSummary: null,
+      // currentTrailLength: null,
       // currentTrailLng: null,
       // currentTrailLat: null,
-      currentTrailStars: null,
+      // currentTrailStars: null,
       allStores: {
         type: 'FeatureCollection',
         features: [],
