@@ -1,5 +1,5 @@
 import React from 'react'
-import HikingTrail from './HikingTrail'
+import TrailProfile from './TrailProfile'
 import { Link } from 'react-router-dom'
 
 class HikingTrailList extends React.Component {

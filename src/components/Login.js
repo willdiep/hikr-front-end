@@ -25,8 +25,8 @@ class Signup extends React.Component {
       .then(result => {
         result.forEach(user => {
           if (
-            user.username == this.state.username &&
-            user.password == this.state.password
+            user.username === this.state.username &&
+            user.password === this.state.password
           ) {
             this.props.login(user.username, user.id)
             this.props.history.push('/')
