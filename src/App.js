@@ -16,7 +16,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      currentId: null,
+      currentUserId: null,
       currentUser: '',
       // longitude: 0,
       // latitude: 0,
@@ -25,6 +25,9 @@ class App extends Component {
       currentTrailSummary: null,
       currentTrailLength: null,
       currentTrailStars: null,
+      currentTrailImgUrl: null,
+      currentTrailCondition: null,
+      currentTrailId: null,
     }
   }
 
@@ -39,36 +42,41 @@ class App extends Component {
 
   handleSignupAndLogin = (username, id) => {
     this.setState({
-      currentId: id,
+      currentUserId: id,
       currentUser: username,
-    })
+    },
+      
+    )
   }
 
-  handleMapClick = (info) => {
+  handleMapClick = (trail) => {
     this.setState({
-      currentTrailName: info.name,
-      currentTrailCity: info.city,
-      currentTrailSummary: info.summary,
-      currentTrailLength: info.length,
-      currentTrailStars: info.stars,
+      currentTrailName: trail.name,
+      currentTrailCity: trail.city,
+      currentTrailSummary: trail.summary,
+      currentTrailLength: trail.length,
+      currentTrailStars: trail.stars,
+      currentTrailImgUrl: trail.img_url,
+      currentTrailCondition: trail.condition,
+      currentTrailId: trail.id,
     })
   }
 
   // logoutUser = (event) => {
   //   this.setState({
-  //     currentId: null,
+  //     currentUserId: null,
   //     currentUser: null
   //   })
   // }
 
-  renderTrail = (routerProps) => {
-    // debugger
-    let TrailId = parseInt(routerProps.match.params.id)
-    let foundTrail = this.state.trails.find(
-      (TrailObj) => TrailObj.id === TrailId
-    )
-    return foundTrail ? <TrailProfile Trail={foundTrail} /> : <NotFound />
-  }
+  // renderTrail = (routerProps) => {
+  //   // debugger
+  //   let TrailId = parseInt(routerProps.match.params.id)
+  //   let foundTrail = this.state.trails.find(
+  //     (TrailObj) => TrailObj.id === TrailId
+  //   )
+  //   return foundTrail ? <TrailProfile Trail={foundTrail} /> : <NotFound />
+  // }
 
   render() {
     return (
@@ -76,51 +84,36 @@ class App extends Component {
         <Router>
           <Navigation username={this.state.currentUser} />
           <Switch>
-            <Route
-              exact
-              path='/'
-              component={() => (
-                <Homepage
-                  findLocation={this.handleUserLocation}
-                  username={this.state.currentUser}
-                />
-              )}
-            />
+            <Route path='/mappage/trail/:name'>
+              <TrailProfile trailInfo={this.state} />
+            </Route>
 
-            <Route
-              exact
-              path='/mappage'
-              component={() => (
-                <MapPage
-                  lat={this.state.latitude}
-                  lng={this.state.longitude}
-                  mapClick={this.handleMapClick}
-                />
-              )}
-            />
+            <Route path='/mappage'>
+              <MapPage
+                lat={this.state.latitude}
+                lng={this.state.longitude}
+                mapClick={this.handleMapClick}
+              />
+            </Route>
 
-            <Route
-              exact
-              path='/alltrails'
-              component={() => <HikingTrailList />}
-            />
+            <Route path='/alltrails'>
+              <HikingTrailList />
+            </Route>
 
-            <Route
-              exact
-              path='/signup'
-              component={() => <Signup signup={this.handleSignupAndLogin} />}
-            />
+            <Route path='/signup'>
+              <Signup signup={this.handleSignupAndLogin} />
+            </Route>
 
-            <Route
-              exact
-              path='/login'
-              component={() => <Login login={this.handleSignupAndLogin} />}
-            />
+            <Route path='/login'>
+              <Login login={this.handleSignupAndLogin} />
+            </Route>
 
-            <Route
-              path='/mappage/:id'
-              render={(routerProps) => this.renderTrail(routerProps)}
-            />
+            <Route path='/'>
+              <Homepage
+                findLocation={this.handleUserLocation}
+                username={this.state.currentUser}
+              />
+            </Route>
           </Switch>
         </Router>
       </div>

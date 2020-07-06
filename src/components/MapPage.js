@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+// import { NavLink, withRouter, Link } from 'react-router-dom'
 import mapboxgl from 'mapbox-gl'
-import { Button } from 'react-bootstrap'
-import { NavLink, withRouter, Link } from 'react-router-dom'
+// import { Button } from 'react-bootstrap'
 import TrailCard from './TrailCard'
 import '../map.css'
 import HikingTrail from './TrailProfile'
@@ -421,9 +421,9 @@ class MapPage extends Component {
     document.querySelector(`#trail-${id}`).classList.add('active')
   }
 
-  handleTrailCardClick = (e) => {
-    console.log(e.target.innerText)
-  }
+  // handleTrailCardClick = (e) => {
+  //   console.log(e.target.innerText)
+  // }
 
   render() {
     const { isFetching } = this.state
@@ -450,12 +450,13 @@ class MapPage extends Component {
               this.state.allStores.features.map((trail) => {
                 // console.log(trail)
                 return (
-                  <TrailCard
-                    key={trail.properties.id}
-                    trail={trail}
-                    handleMouseOver={this.handleMouseOver}
-                    handleTrailCardClick={this.handleTrailCardClick}
-                  />
+                    <TrailCard
+                      key={trail.properties.id}
+                      trail={trail}
+                      handleMouseOver={this.handleMouseOver}
+                      // handleTrailCardClick={this.handleTrailCardClick}
+                      mapClick={this.props.mapClick}
+                    />
                 )
               })
             )}
@@ -468,4 +469,4 @@ class MapPage extends Component {
   }
 }
 
-export default withRouter(MapPage)
+export default MapPage
