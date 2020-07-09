@@ -31,7 +31,8 @@ class Signup extends React.Component {
             this.props.login(user.username, user.id)
             this.props.history.push('/')
           } else {
-            this.props.history.push('/signup')
+            // this.props.history.push('/signup')
+            console.log('invalid username and password')
           }
         })
       })
