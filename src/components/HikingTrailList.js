@@ -12,7 +12,8 @@ class HikingTrailList extends React.Component {
     }
 
     componentDidMount() {
-    fetch('http://localhost:3000/hikingtrails/')
+    // fetch('http://localhost:3000/hikingtrails/')
+    fetch('https://hikr-backend.herokuapp.com/hikingtrails/')
     .then(res => res.json())
     .then((result) => {
         this.setState({

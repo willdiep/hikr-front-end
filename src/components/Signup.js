@@ -44,7 +44,8 @@ class Signup extends React.Component {
 
      
 
-        fetch('http://localhost:3000/users', submitObj)
+        // fetch('http://localhost:3000/users', submitObj)
+        fetch('https://hikr-backend.herokuapp.com/users', submitObj)
         .then(res => res.json())
         .then(
             (result) => {
