@@ -10,14 +10,10 @@ const Card = styled.section`
   `
 
 const Description = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center; */
+  display: grid;
+  align-content: center;
 
 `
-
-const Img = styled.img``
-
 
 class TrailCard extends Component {
   render() {
@@ -47,14 +43,11 @@ class TrailCard extends Component {
           </figure>
 
           <Description>
-            <div onClick={this.props.handleTrailCardClick} className=''>
-              {trailprops.name}
-            </div>
-            <div></div>
-            <div className=''>{trailprops.city}</div>
-            <div className=''>{trailprops.condition}</div>
-            <div className=''>{trailprops.difficulty}</div>
-            <div className=''>{trailprops.stars}</div>
+            <div>{trailprops.name} </div>
+            <div>{trailprops.city}</div>
+            <div>{trailprops.condition}</div>
+            <div>{trailprops.difficulty}</div>
+            <div>{trailprops.stars}</div>
             {/* <div className=''>{trailprops.summary}</div> */}
           </Description>
         </Card>
