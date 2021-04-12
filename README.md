@@ -22,7 +22,6 @@ This is a four-day MVP project group between [Megan](https://github.com/mwong068
 
 ![Map Page](./readme/trail-page.png)
 
-![Iconography](./readme/iconography.png)
 
 
 ## Table Of Content
@@ -132,7 +131,7 @@ Please send a pull request if you have any question regarding setting up. I will
 
 ### 5. React Component Hierarchy
 (Click to enlarge)
-![app component](./readme/react-component-hierarchy.png)
+![app component](./readme/react-component-hierarchy.jpg)
 
 
 
@@ -141,14 +140,14 @@ Please send a pull request if you have any question regarding setting up. I will
 ### 6. Domain Model
 (Click to enlarge)
 
-![domain model](./readme/domain-model.png)
+![domain model](./readme/domain-model.jpg)
 
 
 
 
 ### 7. User Flow Diagram
 (Click to enlarge)
-![user flow diagram](./readme/user-flow-diagram.png)
+![user flow diagram](./readme/user-flow-diagram.jpg)
 
 
 
